@@ -3,111 +3,103 @@
   "generated": "2026-07-01T00:00:00Z",
   "notifications": [
     {
-      "id": "release-1-8-1",
-      "kind": "generic",
-      "title": "AIUX Lab 1.8.1 released",
-      "body": "Version 1.8.1 is now available with bug fixes and improvements.",
+      "id": "release-1-8-0",
+      "kind": "guided",
+      "title": "AIUX Lab 1.8.0 is here",
+      "body": "This release bundles the Figma extraction MCP servers into the DMG, fixes mermaid rendering in packaged builds, and adds the E2E automation suite. Review what changed before you continue.",
       "severity": "info",
-      "minVersion": "1.8.1",
+      "blocking": false,
+      "trigger": { "type": "time", "afterMs": 0 },
+      "completion": { "type": "action-clicked" },
       "actions": [
         {
-          "id": "learn",
-          "label": "Learn more",
+          "id": "view-release",
+          "label": "View release notes",
           "type": "external",
           "target": "https://github.com/Bhuvangoyal466/notifications"
-        }
+        },
+        { "id": "dismiss", "label": "Dismiss", "type": "manual-ack", "target": "" }
       ]
     },
     {
-      "id": "welcome-flow-builder",
+      "id": "node-version-requirement",
       "kind": "generic",
-      "title": "New: Flow Builder",
-      "body": "Compose automations visually with the new Flow Builder.",
-      "severity": "info",
-      "actions": [
-        {
-          "id": "learn",
-          "label": "Learn more",
-          "type": "external",
-          "target": "https://github.com/Bhuvangoyal466/notifications"
-        }
-      ]
-    },
-    {
-      "id": "maintenance-window",
-      "kind": "generic",
-      "title": "Scheduled maintenance",
-      "body": "ServiceNow instances may be briefly unavailable this weekend.",
+      "title": "Node 24+ and pnpm 10+ required",
+      "body": "AIUX Lab needs Node.js >= 24.14.1 and pnpm >= 10. Older versions break the build and widget compile. Run `node -v` and `pnpm -v` to confirm.",
       "severity": "warning"
     },
     {
-      "id": "connect-sn-instance",
-      "kind": "guided",
-      "title": "Connect your ServiceNow instance",
-      "body": "AIUX Lab needs a connected ServiceNow instance to build and preview widgets. Open Setup to connect.",
-      "severity": "warning",
-      "blocking": false,
-      "trigger": {
-        "type": "config-issue",
-        "check": "sn-instance-disconnected"
-      },
-      "completion": {
-        "type": "config-resolved"
-      },
-      "actions": [
-        {
-          "id": "open-setup",
-          "label": "Open Setup",
-          "type": "navigate",
-          "target": "setup"
-        }
-      ]
+      "id": "karuna-version",
+      "kind": "generic",
+      "title": "Pin @servicenow/karuna@^0.3.0",
+      "body": "New apps must use the karuna meta-package at ^0.3.0. 5.x and fragmented aiux-* deps break the build.",
+      "severity": "warning"
     },
     {
-      "id": "complete-first-run-setup",
+      "id": "widget-server-decorator",
+      "kind": "generic",
+      "title": "Widgets with a server script need @server()",
+      "body": "Add @server('./server-script.js') to widgets that have a server-script.js, or the build emits no XML (\"Missing widget XMLs\").",
+      "severity": "info"
+    },
+    {
+      "id": "dependency-outdated",
       "kind": "guided",
-      "title": "Finish setting up AIUX Lab",
-      "body": "Your setup is incomplete. Complete the first-run wizard before continuing.",
+      "title": "Required toolchain is missing or outdated",
+      "body": "AIUX Lab detected that Node.js, pnpm, or git is missing or below the required version. Widget builds and the ServiceNow SDK will not work until this is fixed. Install Node 24+ and pnpm 10+ from Setup.",
       "severity": "critical",
       "blocking": true,
-      "trigger": {
-        "type": "config-issue",
-        "check": "setup-incomplete"
-      },
-      "completion": {
-        "type": "config-resolved"
-      },
+      "trigger": { "type": "config-issue", "check": "dependency-missing" },
+      "completion": { "type": "config-resolved" },
       "actions": [
-        {
-          "id": "open-setup",
-          "label": "Open Setup",
-          "type": "navigate",
-          "target": "setup"
-        }
+        { "id": "open-setup", "label": "Fix in Setup", "type": "navigate", "target": "setup" }
       ]
     },
     {
-      "id": "tip-command-palette",
+      "id": "sdk-not-configured",
       "kind": "guided",
-      "title": "Tip: Command Palette",
-      "body": "Press Cmd+K anytime to jump to files, run commands, and search symbols.",
-      "severity": "info",
+      "title": "ServiceNow SDK path not configured",
+      "body": "The Karuna / ServiceNow SDK path is not set. Widget deploys and instance sync will fail. Configure it in Settings.",
+      "severity": "warning",
       "blocking": false,
-      "trigger": {
-        "type": "time",
-        "afterMs": 60000
-      },
-      "completion": {
-        "type": "manual-ack"
-      },
+      "trigger": { "type": "config-issue", "check": "sdk-not-configured" },
+      "completion": { "type": "config-resolved" },
       "actions": [
-        {
-          "id": "ack",
-          "label": "Got it",
-          "type": "manual-ack",
-          "target": ""
-        }
+        { "id": "open-settings", "label": "Open Settings", "type": "navigate", "target": "settings" }
       ]
+    },
+    {
+      "id": "aiux-cli-unlinked",
+      "kind": "guided",
+      "title": "AIUX CLI is not linked",
+      "body": "The aiux CLI is not globally linked, so terminal commands and some automations won't be available. Re-link it from Setup.",
+      "severity": "warning",
+      "blocking": false,
+      "trigger": { "type": "config-issue", "check": "aiux-cli-unlinked" },
+      "completion": { "type": "config-resolved" },
+      "actions": [
+        { "id": "open-setup", "label": "Open Setup", "type": "navigate", "target": "setup" }
+      ]
+    },
+    {
+      "id": "app-update-available",
+      "kind": "guided",
+      "title": "A newer AIUX Lab build is available",
+      "body": "You're running an outdated build. Update to the latest DMG to get the newest fixes and avoid config drift.",
+      "severity": "warning",
+      "blocking": false,
+      "trigger": { "type": "config-issue", "check": "app-update-outdated" },
+      "completion": { "type": "config-resolved" },
+      "actions": [
+        { "id": "open-settings", "label": "Update now", "type": "navigate", "target": "settings" }
+      ]
+    },
+    {
+      "id": "figma-token-missing",
+      "kind": "generic",
+      "title": "Figma token not configured",
+      "body": "Add a Figma token in Settings to enable design import and Figma extraction.",
+      "severity": "info"
     }
   ]
 }
