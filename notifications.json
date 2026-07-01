@@ -1,0 +1,97 @@
+{
+  "version": 1,
+  "generated": "2026-07-01T00:00:00Z",
+  "notifications": [
+    {
+      "id": "welcome-flow-builder",
+      "kind": "generic",
+      "title": "New: Flow Builder",
+      "body": "Compose automations visually with the new Flow Builder.",
+      "severity": "info",
+      "actions": [
+        {
+          "id": "learn",
+          "label": "Learn more",
+          "type": "external",
+          "target": "https://github.com/Bhuvangoyal466/notifications"
+        }
+      ]
+    },
+    {
+      "id": "maintenance-window",
+      "kind": "generic",
+      "title": "Scheduled maintenance",
+      "body": "ServiceNow instances may be briefly unavailable this weekend.",
+      "severity": "warning"
+    },
+    {
+      "id": "connect-sn-instance",
+      "kind": "guided",
+      "title": "Connect your ServiceNow instance",
+      "body": "AIUX Lab needs a connected ServiceNow instance to build and preview widgets. Open Setup to connect.",
+      "severity": "warning",
+      "blocking": false,
+      "trigger": {
+        "type": "config-issue",
+        "check": "sn-instance-disconnected"
+      },
+      "completion": {
+        "type": "config-resolved"
+      },
+      "actions": [
+        {
+          "id": "open-setup",
+          "label": "Open Setup",
+          "type": "navigate",
+          "target": "setup"
+        }
+      ]
+    },
+    {
+      "id": "complete-first-run-setup",
+      "kind": "guided",
+      "title": "Finish setting up AIUX Lab",
+      "body": "Your setup is incomplete. Complete the first-run wizard before continuing.",
+      "severity": "critical",
+      "blocking": true,
+      "trigger": {
+        "type": "config-issue",
+        "check": "setup-incomplete"
+      },
+      "completion": {
+        "type": "config-resolved"
+      },
+      "actions": [
+        {
+          "id": "open-setup",
+          "label": "Open Setup",
+          "type": "navigate",
+          "target": "setup"
+        }
+      ]
+    },
+    {
+      "id": "tip-command-palette",
+      "kind": "guided",
+      "title": "Tip: Command Palette",
+      "body": "Press Cmd+K anytime to jump to files, run commands, and search symbols.",
+      "severity": "info",
+      "blocking": false,
+      "trigger": {
+        "type": "time",
+        "afterMs": 60000
+      },
+      "completion": {
+        "type": "manual-ack"
+      },
+      "actions": [
+        {
+          "id": "ack",
+          "label": "Got it",
+          "type": "manual-ack",
+          "target": ""
+        }
+      ]
+    }
+  ]
+}
