@@ -3,6 +3,22 @@
   "generated": "2026-07-01T00:00:00Z",
   "notifications": [
     {
+      "id": "release-1-8-1",
+      "kind": "generic",
+      "title": "AIUX Lab 1.8.1 released",
+      "body": "Version 1.8.1 is now available with bug fixes and improvements.",
+      "severity": "info",
+      "minVersion": "1.8.1",
+      "actions": [
+        {
+          "id": "learn",
+          "label": "Learn more",
+          "type": "external",
+          "target": "https://github.com/Bhuvangoyal466/notifications"
+        }
+      ]
+    },
+    {
       "id": "welcome-flow-builder",
       "kind": "generic",
       "title": "New: Flow Builder",
