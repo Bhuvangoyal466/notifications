@@ -55,28 +55,54 @@
       "id": "53b91629-440d-45bc-9090-f7756c2cad90",
       "kind": "generic",
       "title": "Node 24+ and pnpm 10+ required",
-      "body": "AIUX Lab needs Node.js >= 24.14.1 and pnpm >= 10. Older versions break the build and widget compile. Run `node -v` and `pnpm -v` to confirm.",
+      "body": "AIUX Lab needs Node.js >= 24.14.1 and pnpm >= 10. Older versions break the build and widget compile.\n\nClick **Fix automatically** to install the required versions in the terminal.",
       "severity": "warning",
       "teamId": "4b515bb3-8d93-47b6-be62-893b6415e2fb",
-      "teamName": "Platform Engineering"
+      "teamName": "Platform Engineering",
+      "actions": [
+        {
+          "id": "fix-node",
+          "label": "Fix automatically",
+          "type": "fix",
+          "target": "",
+          "command": "nvm install 24 >/dev/null 2>&1; corepack enable 2>/dev/null; npm install -g pnpm@10 && node -v && pnpm -v"
+        }
+      ]
     },
     {
       "id": "9611565a-dded-4b9a-9258-e1c48e712e79",
       "kind": "generic",
       "title": "Pin @servicenow/karuna@^0.3.0",
-      "body": "New apps must use the karuna meta-package at ^0.3.0. 5.x and fragmented aiux-* deps break the build.",
+      "body": "New apps must use the karuna meta-package at ^0.3.0. 5.x and fragmented aiux-* deps break the build.\n\nClick **Install karuna** to add it to the current project.",
       "severity": "warning",
       "teamId": "0ce0eb93-3ff6-4b8c-a0d9-f19885f264bd",
-      "teamName": "Widget Developers"
+      "teamName": "Widget Developers",
+      "actions": [
+        {
+          "id": "fix-karuna",
+          "label": "Install karuna",
+          "type": "fix",
+          "target": "",
+          "command": "pnpm add @servicenow/karuna@^0.3.0"
+        }
+      ]
     },
     {
       "id": "c72e82d4-0c27-46f4-b2a6-e5793d483d7e",
       "kind": "generic",
       "title": "Widgets with a server script need @server()",
-      "body": "Add @server('./server-script.js') to widgets that have a server-script.js, or the build emits no XML (\"Missing widget XMLs\").",
+      "body": "Add @server('./server-script.js') to widgets that have a server-script.js, or the build emits no XML (\"Missing widget XMLs\"). This is a manual code fix.",
       "severity": "info",
       "teamId": "0ce0eb93-3ff6-4b8c-a0d9-f19885f264bd",
-      "teamName": "Widget Developers"
+      "teamName": "Widget Developers",
+      "actions": [
+        {
+          "id": "learn-server",
+          "label": "How to fix",
+          "type": "external",
+          "target": "https://github.com/Bhuvangoyal466/notifications"
+        }
+      ]
     },
     {
       "id": "b38cc06f-be9f-47e9-9689-785893170fba",
@@ -173,12 +199,33 @@
     },
     {
       "id": "f3c8e38b-dd71-4432-8e12-8d36ca17f4ea",
-      "kind": "generic",
+      "kind": "guided",
       "title": "Figma token not configured",
-      "body": "Add a Figma token in Settings to enable design import and Figma extraction.",
+      "body": "No Figma token is set. Design import and Figma extraction won't work until you add one in Settings → Integrations.",
       "severity": "info",
       "teamId": "f81c45f1-8bb4-440c-bc8a-cddd620464b7",
-      "teamName": "Design Systems"
+      "teamName": "Design Systems",
+      "blocking": false,
+      "trigger": { "type": "config-issue", "check": "figma-token-missing" },
+      "completion": { "type": "config-resolved" },
+      "actions": [
+        { "id": "add-figma", "label": "Add token", "type": "navigate", "target": "settings" }
+      ]
+    },
+    {
+      "id": "719828f6-42a0-45f6-b312-fcc502c297e4",
+      "kind": "guided",
+      "title": "Figma token expired or revoked",
+      "body": "Your Figma token was rejected by Figma (expired, revoked, or missing read scope). Replace it in Settings → Integrations to restore design import.",
+      "severity": "warning",
+      "teamId": "f81c45f1-8bb4-440c-bc8a-cddd620464b7",
+      "teamName": "Design Systems",
+      "blocking": false,
+      "trigger": { "type": "config-issue", "check": "figma-token-invalid" },
+      "completion": { "type": "config-resolved" },
+      "actions": [
+        { "id": "replace-figma", "label": "Replace token", "type": "navigate", "target": "settings" }
+      ]
     }
   ]
 }
