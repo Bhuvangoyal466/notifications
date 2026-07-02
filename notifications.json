@@ -226,6 +226,145 @@
       "actions": [
         { "id": "replace-figma", "label": "Replace token", "type": "navigate", "target": "settings" }
       ]
+    },
+
+    {
+      "id": "941433d6-3dac-4a02-9ea7-2b033b4b3dd2",
+      "kind": "generic",
+      "title": "TEST: Info toast",
+      "body": "Generic **info** notification — shows as a blue toast and a card in the panel. Has an external link action.",
+      "severity": "info",
+      "teamId": "09957c56-c05c-4436-8113-8fbf513db651",
+      "teamName": "Everyone",
+      "actions": [
+        {
+          "id": "t1",
+          "label": "Open link",
+          "type": "external",
+          "target": "https://github.com/Bhuvangoyal466/notifications"
+        }
+      ]
+    },
+    {
+      "id": "e06d399f-8e43-4084-a8a4-71260563f68e",
+      "kind": "generic",
+      "title": "TEST: Warning toast with fix",
+      "body": "Generic **warning** notification. Click **Run fix** to run a harmless command in the terminal.",
+      "severity": "warning",
+      "teamId": "09957c56-c05c-4436-8113-8fbf513db651",
+      "teamName": "Everyone",
+      "actions": [
+        {
+          "id": "t2",
+          "label": "Run fix",
+          "type": "fix",
+          "target": "",
+          "command": "echo 'AIUX Lab test fix command ran successfully' && node -v"
+        }
+      ]
+    },
+    {
+      "id": "0d6c6137-f029-440f-87ea-68773e0b6019",
+      "kind": "generic",
+      "title": "TEST: Critical toast",
+      "body": "Generic **critical** notification — red accent. Use this to check critical styling in the toast and panel.",
+      "severity": "critical",
+      "teamId": "09957c56-c05c-4436-8113-8fbf513db651",
+      "teamName": "Everyone",
+      "actions": [
+        {
+          "id": "t3",
+          "label": "Learn more",
+          "type": "external",
+          "target": "https://github.com/Bhuvangoyal466/notifications"
+        }
+      ]
+    },
+    {
+      "id": "2099a63f-552d-4491-ada1-6b3644a46050",
+      "kind": "guided",
+      "title": "TEST: Guided info (panel)",
+      "body": "Guided **non-blocking** notification. Non-blocking guided notices live in the panel (not the overlay). Has a navigate action.",
+      "severity": "info",
+      "teamId": "09957c56-c05c-4436-8113-8fbf513db651",
+      "teamName": "Everyone",
+      "blocking": false,
+      "trigger": { "type": "time", "afterMs": 0 },
+      "completion": { "type": "manual-ack" },
+      "actions": [
+        { "id": "t4", "label": "Open Settings", "type": "navigate", "target": "settings" }
+      ]
+    },
+    {
+      "id": "006e22af-72c6-43e0-af6e-763d536f7198",
+      "kind": "guided",
+      "title": "TEST: Guided warning with fix",
+      "body": "Guided **warning** with a terminal fix action. Click **Run fix** to verify the terminal opens and runs the command.",
+      "severity": "warning",
+      "teamId": "09957c56-c05c-4436-8113-8fbf513db651",
+      "teamName": "Everyone",
+      "blocking": false,
+      "trigger": { "type": "time", "afterMs": 0 },
+      "completion": { "type": "manual-ack" },
+      "actions": [
+        {
+          "id": "t5",
+          "label": "Run fix",
+          "type": "fix",
+          "target": "",
+          "command": "echo 'Guided fix ran' && pnpm -v"
+        }
+      ]
+    },
+    {
+      "id": "2b557f0f-14c5-4b97-9087-5de1d7be50b6",
+      "kind": "guided",
+      "title": "TEST: Blocking full-screen overlay",
+      "body": "Guided **critical + blocking** notification — renders as a full-screen overlay that dims the app. Use **Dismiss** to close it (re-shows on navigation).",
+      "severity": "critical",
+      "teamId": "09957c56-c05c-4436-8113-8fbf513db651",
+      "teamName": "Everyone",
+      "blocking": true,
+      "trigger": { "type": "time", "afterMs": 0 },
+      "completion": { "type": "manual-ack" },
+      "actions": [
+        {
+          "id": "t6-fix",
+          "label": "Run fix",
+          "type": "fix",
+          "target": "",
+          "command": "echo 'Blocking overlay fix ran'"
+        },
+        { "id": "t6-dismiss", "label": "Dismiss", "type": "manual-ack", "target": "" }
+      ]
+    },
+    {
+      "id": "982ef0ed-d9bb-4b0f-880b-e6682a61e24d",
+      "kind": "guided",
+      "title": "TEST: Multiple actions",
+      "body": "Guided notification with **three** action buttons — external, fix, and dismiss — to check multi-button layout.",
+      "severity": "info",
+      "teamId": "09957c56-c05c-4436-8113-8fbf513db651",
+      "teamName": "Everyone",
+      "blocking": false,
+      "trigger": { "type": "time", "afterMs": 0 },
+      "completion": { "type": "manual-ack" },
+      "actions": [
+        {
+          "id": "t7-link",
+          "label": "Docs",
+          "type": "external",
+          "target": "https://github.com/Bhuvangoyal466/notifications"
+        },
+        {
+          "id": "t7-fix",
+          "label": "Run fix",
+          "type": "fix",
+          "target": "",
+          "command": "echo 'multi-action fix'"
+        },
+        { "id": "t7-dismiss", "label": "Dismiss", "type": "manual-ack", "target": "" }
+      ]
     }
   ]
 }
