@@ -1,13 +1,42 @@
 {
   "version": 1,
   "generated": "2026-07-01T00:00:00Z",
+  "teams": [
+    {
+      "id": "09957c56-c05c-4436-8113-8fbf513db651",
+      "name": "Everyone",
+      "description": "General AIUX Lab announcements sent to all users"
+    },
+    {
+      "id": "4b515bb3-8d93-47b6-be62-893b6415e2fb",
+      "name": "Platform Engineering",
+      "description": "Toolchain, dependencies, and environment updates"
+    },
+    {
+      "id": "f81c45f1-8bb4-440c-bc8a-cddd620464b7",
+      "name": "Design Systems",
+      "description": "Figma, design import, and UX kit updates"
+    },
+    {
+      "id": "0ce0eb93-3ff6-4b8c-a0d9-f19885f264bd",
+      "name": "Widget Developers",
+      "description": "Widget build, karuna, and component guidance"
+    },
+    {
+      "id": "34b4e902-9b54-4e4f-9bae-7c975fdd6333",
+      "name": "ServiceNow Admins",
+      "description": "Instance connection, SDK, and deploy configuration"
+    }
+  ],
   "notifications": [
     {
-      "id": "release-1-8-0",
+      "id": "a59daacf-a991-4262-acfc-29ae7ac1c420",
       "kind": "guided",
       "title": "AIUX Lab 1.8.0 is here",
       "body": "This release bundles the Figma extraction MCP servers into the DMG, fixes mermaid rendering in packaged builds, and adds the E2E automation suite. Review what changed before you continue.",
       "severity": "info",
+      "teamId": "09957c56-c05c-4436-8113-8fbf513db651",
+      "teamName": "Everyone",
       "blocking": false,
       "trigger": { "type": "time", "afterMs": 0 },
       "completion": { "type": "action-clicked" },
@@ -22,32 +51,40 @@
       ]
     },
     {
-      "id": "node-version-requirement",
+      "id": "53b91629-440d-45bc-9090-f7756c2cad90",
       "kind": "generic",
       "title": "Node 24+ and pnpm 10+ required",
       "body": "AIUX Lab needs Node.js >= 24.14.1 and pnpm >= 10. Older versions break the build and widget compile. Run `node -v` and `pnpm -v` to confirm.",
-      "severity": "warning"
+      "severity": "warning",
+      "teamId": "4b515bb3-8d93-47b6-be62-893b6415e2fb",
+      "teamName": "Platform Engineering"
     },
     {
-      "id": "karuna-version",
+      "id": "9611565a-dded-4b9a-9258-e1c48e712e79",
       "kind": "generic",
       "title": "Pin @servicenow/karuna@^0.3.0",
       "body": "New apps must use the karuna meta-package at ^0.3.0. 5.x and fragmented aiux-* deps break the build.",
-      "severity": "warning"
+      "severity": "warning",
+      "teamId": "0ce0eb93-3ff6-4b8c-a0d9-f19885f264bd",
+      "teamName": "Widget Developers"
     },
     {
-      "id": "widget-server-decorator",
+      "id": "c72e82d4-0c27-46f4-b2a6-e5793d483d7e",
       "kind": "generic",
       "title": "Widgets with a server script need @server()",
       "body": "Add @server('./server-script.js') to widgets that have a server-script.js, or the build emits no XML (\"Missing widget XMLs\").",
-      "severity": "info"
+      "severity": "info",
+      "teamId": "0ce0eb93-3ff6-4b8c-a0d9-f19885f264bd",
+      "teamName": "Widget Developers"
     },
     {
-      "id": "dependency-outdated",
+      "id": "b38cc06f-be9f-47e9-9689-785893170fba",
       "kind": "guided",
       "title": "Required toolchain is missing or outdated",
       "body": "AIUX Lab detected that Node.js, pnpm, or git is missing or below the required version. Widget builds and the ServiceNow SDK will not work until this is fixed. Install Node 24+ and pnpm 10+ from Setup.",
       "severity": "critical",
+      "teamId": "4b515bb3-8d93-47b6-be62-893b6415e2fb",
+      "teamName": "Platform Engineering",
       "blocking": true,
       "trigger": { "type": "config-issue", "check": "dependency-missing" },
       "completion": { "type": "config-resolved" },
@@ -56,11 +93,13 @@
       ]
     },
     {
-      "id": "sdk-not-configured",
+      "id": "a6373844-0587-4ce7-a2d5-68de27c8d5e3",
       "kind": "guided",
       "title": "ServiceNow SDK path not configured",
       "body": "The Karuna / ServiceNow SDK path is not set. Widget deploys and instance sync will fail. Configure it in Settings.",
       "severity": "warning",
+      "teamId": "34b4e902-9b54-4e4f-9bae-7c975fdd6333",
+      "teamName": "ServiceNow Admins",
       "blocking": false,
       "trigger": { "type": "config-issue", "check": "sdk-not-configured" },
       "completion": { "type": "config-resolved" },
@@ -69,11 +108,13 @@
       ]
     },
     {
-      "id": "aiux-cli-unlinked",
+      "id": "b2ecfc3d-2eca-4212-be7e-9691b16908d7",
       "kind": "guided",
       "title": "AIUX CLI is not linked",
       "body": "The aiux CLI is not globally linked, so terminal commands and some automations won't be available. Re-link it from Setup.",
       "severity": "warning",
+      "teamId": "4b515bb3-8d93-47b6-be62-893b6415e2fb",
+      "teamName": "Platform Engineering",
       "blocking": false,
       "trigger": { "type": "config-issue", "check": "aiux-cli-unlinked" },
       "completion": { "type": "config-resolved" },
@@ -82,11 +123,13 @@
       ]
     },
     {
-      "id": "app-update-available",
+      "id": "eaa85aae-b0f2-47af-b5f9-3c3c0f07a206",
       "kind": "guided",
       "title": "A newer AIUX Lab build is available",
       "body": "You're running an outdated build. Update to the latest DMG to get the newest fixes and avoid config drift.",
       "severity": "warning",
+      "teamId": "09957c56-c05c-4436-8113-8fbf513db651",
+      "teamName": "Everyone",
       "blocking": false,
       "trigger": { "type": "config-issue", "check": "app-update-outdated" },
       "completion": { "type": "config-resolved" },
@@ -95,11 +138,13 @@
       ]
     },
     {
-      "id": "figma-token-missing",
+      "id": "f3c8e38b-dd71-4432-8e12-8d36ca17f4ea",
       "kind": "generic",
       "title": "Figma token not configured",
       "body": "Add a Figma token in Settings to enable design import and Figma extraction.",
-      "severity": "info"
+      "severity": "info",
+      "teamId": "f81c45f1-8bb4-440c-bc8a-cddd620464b7",
+      "teamName": "Design Systems"
     }
   ]
 }
