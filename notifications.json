@@ -1,6 +1,7 @@
 {
   "version": 1,
   "generated": "2026-07-01T00:00:00Z",
+  "latestVersion": "1.8.0",
   "teams": [
     {
       "id": "09957c56-c05c-4436-8113-8fbf513db651",
@@ -132,6 +133,21 @@
       "teamName": "Everyone",
       "blocking": false,
       "trigger": { "type": "config-issue", "check": "app-update-outdated" },
+      "completion": { "type": "config-resolved" },
+      "actions": [
+        { "id": "open-settings", "label": "Update now", "type": "navigate", "target": "settings" }
+      ]
+    },
+    {
+      "id": "16b34f2f-32b1-4ab6-8a00-aa45528007a8",
+      "kind": "guided",
+      "title": "Update AIUX Lab to the latest version",
+      "body": "Your AIUX Lab build is behind the latest published version. Update to stay on the supported release and avoid config drift.",
+      "severity": "warning",
+      "teamId": "09957c56-c05c-4436-8113-8fbf513db651",
+      "teamName": "Everyone",
+      "blocking": false,
+      "trigger": { "type": "config-issue", "check": "app-below-latest" },
       "completion": { "type": "config-resolved" },
       "actions": [
         { "id": "open-settings", "label": "Update now", "type": "navigate", "target": "settings" }
