@@ -82,7 +82,7 @@
       "id": "b38cc06f-be9f-47e9-9689-785893170fba",
       "kind": "guided",
       "title": "Required toolchain is missing or outdated",
-      "body": "AIUX Lab detected that Node.js, pnpm, or git is missing or below the required version. Widget builds and the ServiceNow SDK will not work until this is fixed. Install Node 24+ and pnpm 10+ from Setup.",
+      "body": "AIUX Lab detected that Node.js, pnpm, or git is missing or below the required version. Widget builds and the ServiceNow SDK will not work until this is fixed.\n\nClick **Fix automatically** to install pnpm 10 and the correct Node in the terminal.",
       "severity": "critical",
       "teamId": "4b515bb3-8d93-47b6-be62-893b6415e2fb",
       "teamName": "Platform Engineering",
@@ -90,14 +90,20 @@
       "trigger": { "type": "config-issue", "check": "dependency-missing" },
       "completion": { "type": "config-resolved" },
       "actions": [
-        { "id": "open-setup", "label": "Fix in Setup", "type": "navigate", "target": "setup" }
+        {
+          "id": "fix-deps",
+          "label": "Fix automatically",
+          "type": "fix",
+          "target": "",
+          "command": "nvm install 24 >/dev/null 2>&1; corepack enable 2>/dev/null; npm install -g pnpm@10 && node -v && pnpm -v && git --version"
+        }
       ]
     },
     {
       "id": "a6373844-0587-4ce7-a2d5-68de27c8d5e3",
       "kind": "guided",
       "title": "ServiceNow SDK path not configured",
-      "body": "The Karuna / ServiceNow SDK path is not set. Widget deploys and instance sync will fail. Configure it in Settings.",
+      "body": "The Karuna / ServiceNow SDK is not available. Widget deploys and instance sync will fail.\n\nClick **Install SDK** to install it globally via npm.",
       "severity": "warning",
       "teamId": "34b4e902-9b54-4e4f-9bae-7c975fdd6333",
       "teamName": "ServiceNow Admins",
@@ -105,14 +111,20 @@
       "trigger": { "type": "config-issue", "check": "sdk-not-configured" },
       "completion": { "type": "config-resolved" },
       "actions": [
-        { "id": "open-settings", "label": "Open Settings", "type": "navigate", "target": "settings" }
+        {
+          "id": "fix-sdk",
+          "label": "Install SDK",
+          "type": "fix",
+          "target": "",
+          "command": "npm install -g @servicenow/sdk && npx --yes @servicenow/sdk --version"
+        }
       ]
     },
     {
       "id": "b2ecfc3d-2eca-4212-be7e-9691b16908d7",
       "kind": "guided",
       "title": "AIUX CLI is not linked",
-      "body": "The aiux CLI is not globally linked, so terminal commands and some automations won't be available. Re-link it from Setup.",
+      "body": "The aiux CLI is not globally linked, so terminal commands and some automations won't be available.\n\nClick **Link CLI** to install it globally.",
       "severity": "warning",
       "teamId": "4b515bb3-8d93-47b6-be62-893b6415e2fb",
       "teamName": "Platform Engineering",
@@ -120,7 +132,13 @@
       "trigger": { "type": "config-issue", "check": "aiux-cli-unlinked" },
       "completion": { "type": "config-resolved" },
       "actions": [
-        { "id": "open-setup", "label": "Open Setup", "type": "navigate", "target": "setup" }
+        {
+          "id": "fix-cli",
+          "label": "Link CLI",
+          "type": "fix",
+          "target": "",
+          "command": "npm install -g @servicenow/aiux && aiux --version"
+        }
       ]
     },
     {
