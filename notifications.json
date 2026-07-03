@@ -46,7 +46,7 @@
           "id": "view-release",
           "label": "View release notes",
           "type": "external",
-          "target": "https://github.com/Bhuvangoyal466/notifications"
+          "target": "https://code.devsnc.com/dev/aiux-lab/releases"
         },
         { "id": "dismiss", "label": "Dismiss", "type": "manual-ack", "target": "" }
       ]
@@ -209,7 +209,12 @@
       "trigger": { "type": "config-issue", "check": "figma-token-missing" },
       "completion": { "type": "config-resolved" },
       "actions": [
-        { "id": "add-figma", "label": "Add token", "type": "navigate", "target": "settings" }
+        {
+          "id": "add-figma",
+          "label": "Add token",
+          "type": "navigate",
+          "target": "settings#settings-figma-token"
+        }
       ]
     },
     {
@@ -224,7 +229,12 @@
       "trigger": { "type": "config-issue", "check": "figma-token-invalid" },
       "completion": { "type": "config-resolved" },
       "actions": [
-        { "id": "replace-figma", "label": "Replace token", "type": "navigate", "target": "settings" }
+        {
+          "id": "replace-figma",
+          "label": "Replace token",
+          "type": "navigate",
+          "target": "settings#settings-figma-token"
+        }
       ]
     },
 
